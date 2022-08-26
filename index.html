@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <textarea name="icon_input" cols="30" rows="10"></textarea>
+    <textarea name="icon" id="icon" cols="30" rows="10" onclick="proses()"></textarea>
+    <script>
+        proses = () => {
+            let inputIcon = document.querySelector('textarea[name=icon_input]').value;
+            let parser = new DOMParser();
+            var doc = parser.parseFromString(inputIcon, 'text/html');
+            let findIcons = doc.querySelectorAll('i[class*=pli]');
+            let icon = '';
+            findIcons.forEach(myFunction);
+            function myFunction(item, index) {
+                icon+=`'<i class="${item.className} fs-5 me-2"></i>'`+',\n';
+            }
+            let taIcon = document.querySelector('textarea[name=icon]');
+            taIcon.value = icon;
+            taIcon.focus();
+            taIcon.select();
+            document.execCommand('copy');
+        }
+    </script>
+</body>
+</html>
